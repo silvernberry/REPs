@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include head.html %}
+</head>
+<body class="site">
+    {% include header.html %}
+    <div id="journal" class="wrapper">
+        {% include repmd.html %}
+        {{content}}
+        <div id="giscus-cmt">
+            {% include giscus.html %}
+        </div>
+    </div>
+    <div class="totop">
+        <a href="#">
+          <i class='bx backtop bxs-to-top'></i>
+       </a>
+    </div>
+    {% include footerscripts.html %}
+    {%include mathjax.html%}
+    {% include footer.html %}
+</body>
+</html>
