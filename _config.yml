@@ -80,7 +80,7 @@ collections:
 defaults:
   -
     scope:
-      path: ""
+      path: "_REPS"
       type: "REPS" 
     values:
       layout: "rep"

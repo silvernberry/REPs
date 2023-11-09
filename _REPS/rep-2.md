@@ -2,7 +2,7 @@
 rep: 2
 title: EIP Editor Handbook
 description: Sample Description for testing 
-status: final
+status: review
 contributors: joby, naveen
 date: 2018-03-14
 youtube:

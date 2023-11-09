@@ -1,55 +1,92 @@
-
-
-{% assign voteCount = 0 %}
+{% assign votecount = 0 %}
 
 {% for page in site.REPS %}
-{% if page.status == 'vote' %}
-{% assign voteCount = voteCount | plus: 1 %}
-<h1>Currently in Vote</h1> 
-<table>
-  <thead>
-      <tr>
-          <th>Number</th>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Author</th>
-      </tr>
-  </thead>
-  <tbody>
-      {% for page in site.REPS %}
-          {% if page.status == 'vote' and page.rep != nil %}
-          <tr>
-              <td><a class="lnk" href="/REPS/rep-{{page.rep}}">{{ page.rep }}</a></td>
-              <td><a class="lnk" href="/REPS/rep-{{page.rep}}">{{ page.title }}</a></td>
-              <td>{{ page.description | truncate: 100 }}</td>
-              <td>
-                {% assign contributors = page.contributors | split: ", " %}
-                {% for contributor in contributors %}
-                  <a href="https://github.com/{{ contributor }}" target="_blank">{{ contributor }}</a>
-                  {% unless forloop.last %}, {% endunless %}
-                {% endfor %}
-              </td>
-          </tr>
-          {% endif %}
-      {% endfor %}
-  </tbody>
-</table>
-{% endif %}
+  {% if page.status == 'vote' %}
+    {% assign votecount = votecount | plus: 1 %}
+  {% endif %}
 {% endfor %}
 
-{% if voteCount == 0 %}
-
+{% if votecount > 0 %}
+  <h1>REPs: Currently in Vote</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Number</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Author</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% assign sorted_reps = site.REPS | sort: 'date' | reverse %}
+      {% for page in sorted_reps %}
+        {% if page.status == 'vote' and page.rep != nil %}
+          <tr>
+            <td><a class="lnk" href="{{site.baseurl}}/REPS/rep-{{page.rep}}">{{ page.rep }}</a></td>
+            <td><a class="lnk" href="{{site.baseurl}}/REPS/rep-{{page.rep}}">{{ page.title }}</a></td>
+            <td>{{ page.description | truncate: 100 }}</td>
+            <td>
+              {% assign contributors = page.contributors | split: ", " %}
+              {% for contributor in contributors %}
+                <a href="https://github.com/{{ contributor }}" target="_blank">{{ contributor }}</a>
+                {% unless forloop.last %}, {% endunless %}
+              {% endfor %}
+            </td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
 {% endif %}
 
-<hr>
-<br>
 
-<!-- {% assign finalCount = 0 %}
+<!-- Final or review -->
+
+{% assign finalcount = 0 %}
 
 {% for page in site.REPS %}
-{% if page.status == 'final' %}
-{% assign finalCount = finalCount | plus: 1 %}
-<h1> REPs : Finalized & Amended </h1>
+  {% if page.status == 'final' %}
+    {% assign finalcount = finalcount | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+{% if finalcount > 0 %}
+
+  <h1>REPs: Finalized and Ammended </h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Number</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Author</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% assign sorted_reps = site.REPS | sort: 'date' | reverse %}
+      {% for page in sorted_reps %}
+        {% if page.status == 'final' and page.rep != nil %}
+          <tr>
+            <td><a class="lnk" href="{{site.baseurl}}/REPS/rep-{{page.rep}}">{{ page.rep }}</a></td>
+            <td><a class="lnk" href="{{site.baseurl}}/REPS/rep-{{page.rep}}">{{ page.title }}</a></td>
+            <td>{{ page.description | truncate: 100 }}</td>
+            <td>
+              {% assign contributors = page.contributors | split: ", " %}
+              {% for contributor in contributors %}
+                <a href="https://github.com/{{ contributor }}" target="_blank">{{ contributor }}</a>
+                {% unless forloop.last %}, {% endunless %}
+              {% endfor %}
+            </td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% else %}
+
+<h1> REPs : Call for Review </h1>
 <table>
     <thead>
         <tr>
@@ -60,16 +97,18 @@
         </tr>
     </thead>
     <tbody>
-        {% for page in site.REPS %}
-            {% if page.status == 'final' and page.rep != nil %}
+        {% assign sorted_reps = site.REPS | sort: 'date' | reverse %}
+        {% for page in sorted_reps %}
+            {% if page.status == 'review' and page.rep != nil %}
             <tr>
-                <td><a class="lnk" href="/REPS/rep-{{page.rep}}">{{ page.rep }}</a></td>
-                <td><a class="lnk" href="/REPS/rep-{{page.rep}}">{{ page.title }}</a></td>
+                <td><a class="lnk" href="{{site.baseurl}}/REPS/rep-{{page.rep}}">{{ page.rep }}</a></td>
+                <td><a class="lnk" href="{{site.baseurl}}/REPS/rep-{{page.rep}}">{{ page.title }}</a></td>
                 <td>{{ page.description | truncate: 100 }}</td>
                 <td>
                     {% assign contributors = page.contributors | split: ", " %}
                     {% for contributor in contributors %}
-                      <a href="https://github.com/{{ contributor }}" target="_blank">{{ contributor }}</a>{% unless forloop.last %}, {% endunless %}
+                      <a href="https://github.com/{{ contributor }}" target="_blank">{{ contributor }}</a>
+                      {% unless forloop.last %}, {% endunless %}
                     {% endfor %}
                 </td>
             </tr>
@@ -77,78 +116,5 @@
         {% endfor %}
     </tbody>
 </table>
-{% endif %}
-{% endfor %}
 
-{% if fianlCount == 0 %}
-<h1>REPs : Call for Review</h1> 
-{% endif %} -->
-
-{% assign finalCount = 0 %}
-
-{% for page in site.REPS %}
-{% if page.status == 'final' %}
-{% assign finalCount = finalCount | plus: 1 %}
-<h1> REPs : Finalized & Amended </h1> 
-<table>
-  <thead>
-      <tr>
-          <th>Number</th>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Author</th>
-      </tr>
-  </thead>
-  <tbody>
-      {% for page in site.REPS %}
-          {% if page.status == 'final' and page.rep != nil %}
-          <tr>
-              <td><a class="lnk" href="/REPS/rep-{{page.rep}}">{{ page.rep }}</a></td>
-              <td><a class="lnk" href="/REPS/rep-{{page.rep}}">{{ page.title }}</a></td>
-              <td>{{ page.description | truncate: 100 }}</td>
-              <td>
-                {% assign contributors = page.contributors | split: ", " %}
-                {% for contributor in contributors %}
-                  <a href="https://github.com/{{ contributor }}" target="_blank">{{ contributor }}</a>
-                  {% unless forloop.last %}, {% endunless %}
-                {% endfor %}
-              </td>
-          </tr>
-          {% endif %}
-      {% endfor %}
-  </tbody>
-</table>
-{% endif %}
-{% endfor %}
-
-{% if finalCount == 0 %}
-<h1> REPs : Call for Review </h1>
- <table>
-  <thead>
-      <tr>
-          <th>Number</th>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Author</th>
-      </tr>
-  </thead>
-  <tbody>
-      {% for page in site.REPS %}
-          {% if page.status == 'review' and page.rep != nil %}
-          <tr>
-              <td><a class="lnk" href="/REPS/rep-{{page.rep}}">{{ page.rep }}</a></td>
-              <td><a class="lnk" href="/REPS/rep-{{page.rep}}">{{ page.title }}</a></td>
-              <td>{{ page.description | truncate: 100 }}</td>
-              <td>
-                {% assign contributors = page.contributors | split: ", " %}
-                {% for contributor in contributors %}
-                  <a href="https://github.com/{{ contributor }}" target="_blank">{{ contributor }}</a>
-                  {% unless forloop.last %}, {% endunless %}
-                {% endfor %}
-              </td>
-          </tr>
-          {% endif %}
-      {% endfor %}
-  </tbody>
-</table>
 {% endif %}

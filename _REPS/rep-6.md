@@ -2,7 +2,7 @@
 rep: 6
 title: Token Standard
 description: Sample Description for testing 
-status: drop
+status: final
 contributors: Alex
 date: 2019-05-20
 youtube: QF-oyCwaArU

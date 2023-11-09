@@ -27,8 +27,8 @@ title : call
             {% for page in sorted_reps %}
                 {% if page.status == 'review' and page.rep != nil %}
                 <tr>
-                    <td><a class="lnk" href="/REPS/rep-{{page.rep}}">{{ page.rep }}</a></td>
-                    <td><a class="lnk" href="/REPS/rep-{{page.rep}}">{{ page.title }}</a></td>
+                    <td><a class="lnk" href="{{site.baseurl}}/REPS/rep-{{page.rep}}">{{ page.rep }}</a></td>
+                    <td><a class="lnk" href="{{site.baseurl}}/REPS/rep-{{page.rep}}">{{ page.title }}</a></td>
                     <td>{{ page.description | truncate: 100 }}</td>
                     <td>
                         {% assign contributors = page.contributors | split: ", " %}
