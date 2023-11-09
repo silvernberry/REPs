@@ -7,7 +7,10 @@
 {% endfor %}
 
 {% if votecount > 0 %}
-  <h1>REPs: Currently in Vote</h1>
+<div class="titlerssbox">
+  <h1 class="cattitle">REPs: Currently in Vote</h1>
+  <button class="catrss rssbtn"><a class="btnlnk" href="{{ site.baseurl }}/voterss.xml" target="_blank"><i class='bx bx-rss' style="color: #ffffff;"></i>RSS</a></button>  
+</div>
   <table>
     <thead>
       <tr>
@@ -53,7 +56,10 @@
 
 {% if finalcount > 0 %}
 
-  <h1>REPs: Finalized and Ammended </h1>
+<div class="titlerssbox">
+  <h1 class="cattitle">REPs: Finalized and Ammended</h1>
+  <button class="catrss rssbtn"><a class="btnlnk" href="{{ site.baseurl }}/finalrss.xml" target="_blank"><i class='bx bx-rss' style="color: #ffffff;"></i>RSS</a></button>  
+</div>
   <table>
     <thead>
       <tr>
@@ -86,7 +92,10 @@
 
 {% else %}
 
-<h1> REPs : Call for Review </h1>
+<div class="titlerssbox">
+  <h1 class="cattitle">REPs : Call for Review</h1>
+  <button class="catrss rssbtn"><a class="btnlnk" href="{{ site.baseurl }}/reviewrss.xml" target="_blank"><i class='bx bx-rss' style="color: #ffffff;"></i>RSS</a></button>  
+</div>
 <table>
     <thead>
         <tr>

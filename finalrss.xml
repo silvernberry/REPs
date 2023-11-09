@@ -13,6 +13,7 @@ layout: null
   <lastBuildDate>{{ site.time | date: "%a, %d %b %Y %H:%M:%S %z" | xml_escape }}</lastBuildDate>
   <generator>Jekyll</generator>
   {% for page in site.REPS %}
+  {% if page.status == 'final' %}
     <item>
       <title>{{ page.title | xml_escape }}</title>
       <description>{{ page.content | xml_escape }}</description>
@@ -20,6 +21,7 @@ layout: null
       <link>{{ page.url | prepend: site.baseurl | xml_escape }}</link>
       <guid isPermaLink="true">{{ page.url | prepend: site.baseurl | xml_escape }}</guid>
     </item>
+    {% endif %}
   {% endfor %}
 </channel>
 </rss>

@@ -520,6 +520,21 @@ justify-content: center;
   letter-spacing: -1px;
 }
 
+/* others */
+
+.cattitle, .catrss {
+  display: inline-block;
+  vertical-align: middle;
+}
+.catrss{
+  margin-left: 10px ;
+  margin-bottom: 15px;
+}
+.titlerssbox{
+  display: inline-block;
+  vertical-align: middle;
+}
+
 /* breakpoints */
 
 
